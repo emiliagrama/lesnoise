@@ -1,0 +1,11 @@
+class User < ApplicationRecord
+  has_secure_password
+
+  has_many :projects, dependent: :destroy
+
+  validates :email, presence: true, uniqueness: true
+
+  def as_json(options = {})
+  super(options.except(:password_digest))
+  end
+end

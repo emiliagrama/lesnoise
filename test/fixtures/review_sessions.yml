@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  name: MyString
+  base_url: MyString
+  share_token: MyString
+  status: MyString
+
+two:
+  project: two
+  name: MyString
+  base_url: MyString
+  share_token: MyString
+  status: MyString
