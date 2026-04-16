@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :review_sessions, only: [:create]
     end
 
-    resources :review_sessions, only: [:show] do
+    resources :review_sessions, only: [:index, :show] do
       resources :comments, only: [:index, :create]
     end
 

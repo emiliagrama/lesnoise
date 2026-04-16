@@ -1,5 +1,9 @@
 module Api
   class ReviewSessionsController < ApplicationController
+    def index
+      review_sessions = current_user.projects.includes(:review_sessions).flat_map(&:review_sessions)
+      render json: review_sessions
+    end
 
     def create
       project = current_user.projects.find(params[:project_id])
