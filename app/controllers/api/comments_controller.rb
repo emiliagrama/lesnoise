@@ -22,7 +22,16 @@ module Api
     private
 
     def comment_params
-      params.permit(:author_name, :body, :page_url, :x_percent, :y_percent)
-    end
+      params.require(:comment).permit(
+        :body,
+        :author_name,
+        :page_url,
+        :page_path,
+        :x_percent,
+        :y_document,
+        :viewport_width,
+        :viewport_height
+      )   
+     end
   end
 end
