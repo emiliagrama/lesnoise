@@ -28,10 +28,11 @@ module Api
         :page_url,
         :page_path,
         :x_percent,
+        :y_percent,
         :y_document,
         :viewport_width,
         :viewport_height
-      )   
-     end
+      )
+    end
   end
 end
