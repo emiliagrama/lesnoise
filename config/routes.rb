@@ -7,12 +7,9 @@ Rails.application.routes.draw do
       resources :review_sessions, only: [:create]
     end
 
-    resources :review_sessions, only: [:index, :show] do
-      resources :comments, only: [:index, :create]
-    end
-
-    resources :comments, only: [:update]
-  end
-
+resources :review_sessions, only: [:index, :show] do
+  resources :comments, only: [:index, :create, :update, :destroy]
+end
+end
   get "review/:share_token", to: "public/reviews#show"
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_05_24_082941) do
+ActiveRecord::Schema[7.1].define(version: 2026_05_24_192331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_24_082941) do
     t.integer "viewport_width"
     t.integer "viewport_height"
     t.string "page_path"
+    t.float "x_document"
+    t.string "element_selector"
+    t.float "x_element"
+    t.float "y_element"
     t.index ["review_session_id"], name: "index_comments_on_review_session_id"
   end
 
