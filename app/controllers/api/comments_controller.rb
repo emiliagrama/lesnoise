@@ -79,7 +79,8 @@ module Api
         :x_element,
         :y_element,
         :viewport_width,
-        :viewport_height
+        :viewport_height,
+        :resolved
       )
     end
   end
