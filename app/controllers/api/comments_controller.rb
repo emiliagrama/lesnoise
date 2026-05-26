@@ -80,7 +80,8 @@ module Api
         :y_element,
         :viewport_width,
         :viewport_height,
-        :resolved
+        :resolved,
+        :author_type,
       )
     end
   end

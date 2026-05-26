@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_05_26_090544) do
+ActiveRecord::Schema[7.1].define(version: 2026_05_26_093346) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_05_26_090544) do
     t.float "x_element"
     t.float "y_element"
     t.boolean "resolved", default: false, null: false
+    t.string "author_type", default: "client", null: false
     t.index ["review_session_id"], name: "index_comments_on_review_session_id"
   end
 
