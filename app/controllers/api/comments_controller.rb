@@ -13,6 +13,14 @@ module Api
       comment = review_session.comments.build(comment_params)
 
       if comment.save
+        ActionCable.server.broadcast(
+          "review_session_#{review_session.id}",
+          {
+            action: "created",
+            comment: comment
+          }
+        )
+
         render json: comment, status: :created
       else
         render json: { errors: comment.errors.full_messages }, status: :unprocessable_entity
@@ -24,6 +32,14 @@ module Api
       comment = review_session.comments.find(params[:id])
 
       if comment.update(comment_params)
+        ActionCable.server.broadcast(
+          "review_session_#{review_session.id}",
+          {
+            action: "updated",
+            comment: comment
+          }
+        )
+
         render json: comment
       else
         render json: { errors: comment.errors.full_messages }, status: :unprocessable_entity
@@ -35,6 +51,15 @@ module Api
       comment = review_session.comments.find(params[:id])
 
       comment.destroy
+
+      ActionCable.server.broadcast(
+        "review_session_#{review_session.id}",
+        {
+          action: "deleted",
+          comment_id: comment.id
+        }
+      )
+
       head :no_content
     end
 

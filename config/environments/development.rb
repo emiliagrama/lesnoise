@@ -55,7 +55,10 @@ Rails.application.configure do
 
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
+  
+  # config/environments/development.rb
 
+  config.action_cable.disable_request_forgery_protection = true
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
