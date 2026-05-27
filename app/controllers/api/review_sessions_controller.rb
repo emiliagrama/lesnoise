@@ -29,6 +29,21 @@ module Api
       render json: review_session
     end
 
+    def destroy
+      review_session = current_user.projects
+                                  .includes(:review_sessions)
+                                  .flat_map(&:review_sessions)
+                                  .find { |session| session.id == params[:id].to_i }
+
+      if review_session
+        review_session.destroy
+        head :no_content
+      else
+        render json: { error: "Review session not found" }, status: :not_found
+      end
+    end
+
+
     private
 
     def review_session_params
