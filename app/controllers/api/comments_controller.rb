@@ -17,7 +17,8 @@ module Api
           "review_session_#{review_session.id}",
           {
             action: "created",
-            comment: comment
+            comment: comment,
+            unresolved_comments_count: review_session.comments.where(resolved: false).count
           }
         )
 
@@ -36,7 +37,8 @@ module Api
           "review_session_#{review_session.id}",
           {
             action: "updated",
-            comment: comment
+            comment: comment,
+            unresolved_comments_count: review_session.comments.where(resolved: false).count
           }
         )
 
@@ -56,7 +58,8 @@ module Api
         "review_session_#{review_session.id}",
         {
           action: "deleted",
-          comment_id: comment.id
+          comment_id: comment.id,
+          unresolved_comments_count: review_session.comments.where(resolved: false).count
         }
       )
 
