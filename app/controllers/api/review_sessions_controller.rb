@@ -25,8 +25,17 @@ module Api
     end
 
     def show
-      review_session = ReviewSession.find(params[:id])
-      render json: review_session
+      review_session = current_user.projects
+                                  .joins(:review_sessions)
+                                  .find_by(review_sessions: { id: params[:id] })
+                                  &.review_sessions
+                                  &.find(params[:id])
+
+      if review_session
+        render json: review_session
+      else
+        render json: { error: "Review session not found" }, status: :not_found
+      end
     end
 
     def destroy
@@ -45,7 +54,12 @@ module Api
 
 
     private
-
+    def find_user_review_session
+      ReviewSession.joins(:project)
+                  .where(projects: { user_id: current_user.id })
+                  .find_by(id: params[:id])
+    end
+    
     def review_session_params
       params.permit(:name, :base_url)
     end
