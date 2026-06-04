@@ -5,6 +5,10 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
 
+  validates :password,
+            length: { minimum: 8 },
+            if: -> { password.present? }
+
   def generate_password_reset_token!
     update!(
       reset_password_token: SecureRandom.urlsafe_base64(32),
