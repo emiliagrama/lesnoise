@@ -7,7 +7,13 @@ module Api
 
       if user.save
         token = encode_token({ user_id: user.id })
-        render json: { user: user, token: token }, status: :created
+        render json: {
+          user: {
+            id: user.id,
+            email: user.email
+          },
+          token: token
+        }, status: :created
       else
         render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
       end
@@ -18,8 +24,14 @@ module Api
 
       if user&.authenticate(params[:password])
         token = encode_token({ user_id: user.id })
-        render json: { user: user, token: token }, status: :ok
-      else
+        render json: {
+          user: {
+            id: user.id,
+            email: user.email
+          },
+          token: token
+        }, status: :ok 
+     else
         render json: { error: "Invalid email or password" }, status: :unauthorized
       end
     end
@@ -55,6 +67,31 @@ module Api
         render json: { message: "Password has been reset successfully." }, status: :ok
       else
         render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
+    def me
+      render json: {
+        user: {
+          id: @current_user.id,
+          email: @current_user.email,
+          created_at: @current_user.created_at
+        }
+      }, status: :ok
+    end
+
+    def update_password
+      unless @current_user.authenticate(params[:current_password])
+        return render json: { error: "Current password is incorrect." }, status: :unprocessable_entity
+      end
+
+      if @current_user.update(
+        password: params[:password],
+        password_confirmation: params[:password_confirmation]
+      )
+        render json: { message: "Password updated successfully." }, status: :ok
+      else
+        render json: { errors: @current_user.errors.full_messages }, status: :unprocessable_entity
       end
     end
 

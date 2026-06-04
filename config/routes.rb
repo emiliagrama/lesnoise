@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   namespace :api do
     post "signup", to: "auth#signup"
     post "login", to: "auth#login"
+    get "me", to: "auth#me"
+    patch "password", to: "auth#update_password"
     post "forgot_password", to: "auth#forgot_password"
     patch "reset_password", to: "auth#reset_password"
 
