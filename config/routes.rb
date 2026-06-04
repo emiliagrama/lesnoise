@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :review_sessions, only: [:create]
     end
 
-    resources :review_sessions, only: [:index, :show, :destroy] do
+    resources :review_sessions, only: [:index, :show, :destroy, :update] do
       resources :comments, only: [:index, :create, :update, :destroy]
   end
 end

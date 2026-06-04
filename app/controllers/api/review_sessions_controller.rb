@@ -38,6 +38,22 @@ module Api
       end
     end
 
+    def update
+      review_session = find_user_review_session
+
+      unless review_session
+        return render json: { error: "Review session not found" }, status: :not_found
+      end
+
+      if review_session.update(review_session_params)
+        render json: review_session.as_json.merge(
+          unresolved_comments_count: review_session.comments.where(resolved: false).count
+        ), status: :ok
+      else
+        render json: { errors: review_session.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
     def destroy
       review_session = current_user.projects
                                   .includes(:review_sessions)
