@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   private
 
   def secret_key
-    Rails.application.credentials.secret_key_base
+    Rails.application.credentials.secret_key_base || ENV.fetch("SECRET_KEY_BASE")
   end
 
   def encode_token(payload)
