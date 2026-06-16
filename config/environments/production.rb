@@ -39,11 +39,9 @@ Rails.application.configure do
 config.action_cable.url = ENV.fetch("ACTION_CABLE_URL", "wss://api.lesnoise.com/cable")
 
 config.action_cable.allowed_request_origins = [
-  "https://www.lesnoise.com",
-  "https://lesnoise.com",
-  "https://lesnoise-frontend.vercel.app",
-  "http://127.0.0.1:5173",
-  "http://localhost:5173"
+  %r{\Ahttps://.*\z},
+  %r{\Ahttp://localhost:\d+\z},
+  %r{\Ahttp://127\.0\.0\.1:\d+\z}
 ]
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
