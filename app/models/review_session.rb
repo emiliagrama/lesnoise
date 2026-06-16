@@ -5,7 +5,8 @@ class ReviewSession < ApplicationRecord
   before_validation :set_share_token, on: :create
   before_validation :generate_slug, on: :create
 
-  validates :name, :base_url, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :base_url, presence: true, length: { maximum: 255 }
   validates :slug, presence: true, uniqueness: true
 
   validate :name_unique_for_user
