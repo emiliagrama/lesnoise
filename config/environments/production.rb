@@ -36,13 +36,15 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
   # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
-  config.action_cable.url = "wss://lesnoise-api-b5407e4f19e1.herokuapp.com/cable"
+config.action_cable.url = ENV.fetch("ACTION_CABLE_URL", "wss://api.lesnoise.com/cable")
 
-  config.action_cable.allowed_request_origins = [
-    "https://lesnoise-frontend.vercel.app",
-    "http://127.0.0.1:5173",
-    "http://localhost:5173"
-  ]
+config.action_cable.allowed_request_origins = [
+  "https://www.lesnoise.com",
+  "https://lesnoise.com",
+  "https://lesnoise-frontend.vercel.app",
+  "http://127.0.0.1:5173",
+  "http://localhost:5173"
+]
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
@@ -72,6 +74,24 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "backend_production"
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.default_url_options = {
+    host: ENV.fetch("FRONTEND_HOST", "www.lesnoise.com"),
+    protocol: "https"
+  }
+
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch("SMTP_ADDRESS"),
+    port: ENV.fetch("SMTP_PORT", 587).to_i,
+    domain: ENV.fetch("SMTP_DOMAIN", "lesnoise.com"),
+    user_name: ENV.fetch("SMTP_USERNAME"),
+    password: ENV.fetch("SMTP_PASSWORD"),
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

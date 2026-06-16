@@ -42,8 +42,9 @@ module Api
       if user
         user.generate_password_reset_token!
 
-        reset_url = "#{params[:frontend_url]}/reset-password/#{user.reset_password_token}"
-
+        frontend_url = ENV.fetch("FRONTEND_URL", "https://www.lesnoise.com")
+        reset_url = "#{frontend_url}/reset-password/#{user.reset_password_token}"
+        
         PasswordMailer.with(user: user, reset_url: reset_url).reset.deliver_now
       end
 
