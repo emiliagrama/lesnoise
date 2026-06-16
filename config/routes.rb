@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:index, :create, :update, :destroy]
   end
 end
-  get "review/:share_token", to: "public/reviews#show"
+  get "review/:slug", to: "public/reviews#show"
 
   mount ActionCable.server => "/cable"
 end

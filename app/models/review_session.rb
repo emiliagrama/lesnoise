@@ -3,8 +3,10 @@ class ReviewSession < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   before_validation :set_share_token, on: :create
+  before_validation :generate_slug, on: :create
 
   validates :name, :base_url, presence: true, length: { maximum: 30 }
+  validates :slug, presence: true, uniqueness: true
 
   validate :name_unique_for_user
 
@@ -32,5 +34,22 @@ class ReviewSession < ApplicationRecord
 
   def set_share_token
     self.share_token ||= SecureRandom.hex(16)
+  end
+
+  def generate_slug
+    return if slug.present?
+
+    base = name.to_s.parameterize
+    base = "review" if base.blank?
+
+    candidate = base
+    counter = 2
+
+    while ReviewSession.exists?(slug: candidate)
+      candidate = "#{base}-#{counter}"
+      counter += 1
+    end
+
+    self.slug = candidate
   end
 end
