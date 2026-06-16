@@ -37,7 +37,7 @@ class ReviewSession < ApplicationRecord
   end
 
   def generate_slug
-    return if slug.present?
+    return if self.slug.present?
 
     base = name.to_s.parameterize
     base = "review" if base.blank?
