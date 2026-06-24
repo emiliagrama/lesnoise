@@ -1,24 +1,51 @@
-# README
+# LesNoise
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Collaborative website review platform that allows developers and clients to leave visual feedback directly on websites.
 
-Things you may want to cover:
+## Why I built it
 
-* Ruby version
+Collecting website feedback through emails, screenshots and chat messages is slow and confusing.
 
-* System dependencies
+LesNoise lets users click anywhere on a page and leave comments exactly where feedback belongs.
 
-* Configuration
+## Features
 
-* Database creation
+- Visual website annotations
+- Real-time comments with WebSockets
+- Client and developer roles
+- Comment resolution workflow
+- Shareable review links
+- Authentication and password reset
+- Responsive dashboard
 
-* Database initialization
+## Tech Stack
 
-* How to run the test suite
+### Backend
+- Ruby on Rails
+- PostgreSQL
+- ActionCable
+- Redis
 
-* Services (job queues, cache servers, search engines, etc.)
+### Frontend
+- React
+- Vite
 
-* Deployment instructions
+### Deployment
+- Heroku
+- Vercel
 
-* ...
+## Live Demo
+
+https://www.lesnoise.com
+
+## Screenshots
+<p align="center">
+<img src="https://github.com/user-attachments/assets/ad08ef67-0332-4228-995e-d51d26d23590" width="900" >
+</p>
+
+## Future Improvements
+
+- Subscription plans
+- Team collaboration
+- Advanced reporting
+
