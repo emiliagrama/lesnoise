@@ -2,12 +2,16 @@
 
 <p>You requested a password reset.</p>
 
-<p>
-  Click the link below to choose a new password:
-</p>
+<p>Click the link below to choose a new password:</p>
 
 <p>
-  <a href="<%= @reset_url %>">Reset password</a>
+  <%= link_to "Reset your password", @reset_url %>
+</p>
+
+<p>If the link is not clickable, copy and paste this URL into your browser:</p>
+
+<p>
+  <%= @reset_url %>
 </p>
 
 <p>This link expires in 2 hours.</p>
